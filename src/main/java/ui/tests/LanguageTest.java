@@ -1,5 +1,6 @@
 package ui.tests;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -31,11 +32,22 @@ public class LanguageTest extends UITest {
         }
     }
 
+
     // TODO: implement below ui.tests
 
+    @DataProvider
+    public static Object[][] sloganDP() {
+        return new Object[][]{
+            {"ro", "Pagina Oficială"}
+        };
+    }
 
-    @Test(description = "RM-100")
-    public void slogan() {}
+    @Test(description = "RM-100", dataProvider = "sloganDP")
+    public void slogan(String lang, String officialPage) {
+        Moldova moldova = Moldova.init(driver);
+        moldova.setLanguage(lang);
+        Assert.assertEquals(moldova.officialPage.getText(), officialPage, "Official Page text");
+    }
 
     @Test
     public void government() {}
@@ -47,5 +59,11 @@ public class LanguageTest extends UITest {
     public void currency() {}
 
     @Test
-    public void weather() {}
+    public void weather() {
+        Moldova moldova = Moldova.init(driver);
+        moldova.setLanguage("ru");
+        Assert.assertEquals(moldova.south.getText(), "ЮГ");
+        Assert.assertEquals(moldova.day.getText(), "День");
+        Assert.assertEquals(moldova.night.getText(), "Ночь");
+    }
 }

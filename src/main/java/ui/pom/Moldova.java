@@ -23,6 +23,17 @@ public class Moldova extends POM {
     @FindBy(css = "input.form-text")
     public WebElement searchInput;
 
+    @FindBy(xpath = "//li[@id='south']/span")
+    public WebElement south;
+
+    @FindBy(xpath = "(//div[@class='mheader']/span)[2]")
+    public WebElement day;
+
+    @FindBy(xpath = "(//div[@class='mheader']/span)[3]")
+    public WebElement night;
+
+
+
 
     private Moldova(WebDriver driver) {
         super(driver);
